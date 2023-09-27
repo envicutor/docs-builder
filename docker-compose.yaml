@@ -1,0 +1,14 @@
+services:
+  pdf-builder:
+    container_name: pdf-builder
+    image: texlive/texlive:latest
+    volumes:
+      - ${SPEC_PATH}:/spec
+      - ${HANDBOOK_PATH}:/handbook
+  html-builder:
+    container_name: html-builder
+    image: html-builder
+    build: .
+    volumes:
+      - ${SPEC_PATH}:/spec
+      - ${HANDBOOK_PATH}:/handbook
