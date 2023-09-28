@@ -1,30 +1,24 @@
-run = docker-compose run --rm -it $(1) bash -c "cd /$(3) && $(2)"
-build_pdf = $(call run,pdf-builder,latexmk -pdf $(1).tex,$(1))
-clean = $(call run,pdf-builder,latexmk -C,$(1))
-define build_html =
-make clean-$(1)
-$(call run,pdf-builder,latexmk $(1).tex,$(1))
-$(call run,html-builder,latex2html $(1).tex,$(1))
-endef
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
-env: ## Copy .env.sample to .env
-	cp .env.sample .env
+build = docker run --rm -it -v $(1):/app sphinxdoc/sphinx:7.1.2 bash -c "cd /app && rm -rf _build && make html"
+serve = docker-compose run --build --rm -it -p $(2):$(2) -v $(1):/app server\
+/bin/sh -c "cd /app/_build/html && serve -n --no-port-switching -p $(2)"
 
-spec: ## Build the specification document
-	$(call build_pdf,spec)
+handbook:
+	$(call build,${HANDBOOK_PATH})
 
-handbook: ## Build the handbook
-	$(call build_pdf,handbook)
+spec:
+	$(call build,${SPEC_PATH})
 
-html-spec: ## Build the html files
-	$(call build_html,spec)
+serve-handbook:
+	$(call serve,${HANDBOOK_PATH},3000)
 
-html-handbook: ## Build the html files
-	$(call build_html,handbook)
+serve-spec:
+	$(call serve,${SPEC_PATH},4000)
 
-
-clean-spec: ## Clean temporary files
-	$(call clean,spec)
-
-clean-handbook: ## Clean temporary files
-	$(call clean,handbook)
+env: ## Set up the .env file, takes "spec" and "handbook" arguments representing the spec path and the handbook path
+	echo SPEC_PATH="$(spec)" > .env
+	echo HANDBOOK_PATH="$(handbook)" >> .env

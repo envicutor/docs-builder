@@ -1,3 +1,3 @@
-FROM texlive/texlive:latest AS container
+FROM node:18.18.0-alpine3.18
 
-RUN apt-get update && apt-get install -y latex2html
+RUN npm install -g serve
