@@ -1,6 +1,11 @@
 services:
+  builder:
+    container_name: builder
+    image: builder
+    build: ./docker/builder
+    working_dir: /app
   server:
     container_name: server
     image: server
-    build: .
+    build: ./docker/server
     working_dir: /app
