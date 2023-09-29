@@ -1,5 +1,5 @@
 build: ## Build sphinx html at a certain path
-	docker compose run --build --rm -it -v $(path):/app builder	bash -c "cd /app && rm -rf _build && make html"
+	docker compose run --build --rm -v $(path):/app builder	bash -c "cd /app && rm -rf _build && make html"
 
 serve: ## Serve html at a certain path
 	docker compose run --build --rm -it -p $(port):$(port) -v $(path):/app server \
