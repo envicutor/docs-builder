@@ -1,11 +1,7 @@
 services:
   builder:
     container_name: builder
+    network_mode: bridge
     image: builder
     build: ./docker/builder
-    working_dir: /app
-  server:
-    container_name: server
-    image: server
-    build: ./docker/server
     working_dir: /app
