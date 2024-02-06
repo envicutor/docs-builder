@@ -1,7 +1,7 @@
 services:
-  server:
-    container_name: server
+  docs-server:
+    container_name: docs-server
     network_mode: bridge
-    image: server
+    image: docs-server
     build: ./docker/server
     working_dir: /app/_build/html

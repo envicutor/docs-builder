@@ -1,7 +1,7 @@
 services:
-  builder:
-    container_name: builder
+  docs-builder:
+    container_name: docs-builder
     network_mode: bridge
-    image: builder
+    image: docs-builder
     build: ./docker/builder
     working_dir: /app
