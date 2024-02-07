@@ -1,0 +1,7 @@
+services:
+  docs-pdf:
+    container_name: docs-pdf
+    network_mode: bridge
+    image: docs-pdf
+    build: ./docker/pdf
+    working_dir: /app
