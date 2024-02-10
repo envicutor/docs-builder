@@ -13,3 +13,4 @@ pdf:
 env: ## Set up the .env file, takes "spec" and "handbook" arguments representing the spec path and the handbook path
 	echo SPEC_PATH="$(spec)" > .env
 	echo HANDBOOK_PATH="$(handbook)" >> .env
+	echo MIDYEAR_PATH="$(midyear)" >> .env
