@@ -14,3 +14,4 @@ env: ## Set up the .env file, takes "spec" and "handbook" arguments representing
 	echo SPEC_PATH="$(spec)" > .env
 	echo HANDBOOK_PATH="$(handbook)" >> .env
 	echo MIDYEAR_PATH="$(midyear)" >> .env
+	echo FINAL_PATH="$(final)" >> .env
