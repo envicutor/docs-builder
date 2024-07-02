@@ -8,7 +8,7 @@ serve: ## Serve html at a certain path
 
 pdf:
 	docker compose -f docker-compose-pdf.yaml run --build --rm -v $(path):/app docs-pdf	\
-	bash -c 'rm -rf _build && make latexpdf'
+	bash -c 'rm -rf _build && make latexpdf SPHINXOPTS="-W --keep-going -n"'
 
 env: ## Set up the .env file, takes "spec" and "handbook" arguments representing the spec path and the handbook path
 	echo SPEC_PATH="$(spec)" > .env
