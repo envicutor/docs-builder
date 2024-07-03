@@ -22,4 +22,4 @@ if [ "$2" = "final" ]; then
   path=$FINAL_PATH
 fi
 
-make $1 path=$path port=$port
+make $1 path="$path" port=$port
